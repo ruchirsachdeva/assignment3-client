@@ -9,7 +9,16 @@ import {AppService} from "../service/app.service";
 export class LoginComponent {
 
 
-  constructor() {
+  credentials = {username: '', password: ''};
+
+  constructor(private app: AppService, private http: HttpClient, private router: Router) {
+  }
+
+  login() {
+    this.app.authenticate(this.credentials, () => {
+      this.router.navigateByUrl('/');
+    });
+    return false;
   }
 
 }
