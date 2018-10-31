@@ -33,7 +33,29 @@ export class UserService {
     return this.http.get('//localhost:8080/api/users/user/'+username+'/tests', httpOptions);
   }
 
+  getUser(username: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: 'Bearer ' + localStorage.getItem('jwt')})
 
+    };
+
+
+    //return this.http.get('//localhost:8080//cool-cars');
+    return this.http.get('//localhost:8080/api/users/user/'+username, httpOptions);
+  }
+
+
+
+  getRss(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: 'Bearer ' + localStorage.getItem('jwt')})
+
+    };
+
+
+    //return this.http.get('//localhost:8080//cool-cars');
+    return this.http.get('//localhost:8080/api/users/rssfeed', httpOptions);
+  }
 
 
   getMe(): Observable<any> {

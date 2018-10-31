@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+  isPatient() {
+    return "patient" == localStorage.getItem('role');
+  }
 
   ngOnInit() {
 

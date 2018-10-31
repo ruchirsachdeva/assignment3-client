@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 import {UserService} from "../shared/user/user.service";
 import * as d3 from 'd3';
 import {DataSource} from "@angular/cdk/collections";
-import {Data} from "../models/domains";
+import {Data, User} from "../models/domains";
 
 @Component({
   selector: 'app-session-list',
@@ -13,16 +13,30 @@ import {Data} from "../models/domains";
 })
 export class SessionListComponent implements OnInit, OnDestroy {
 
-
   sessions: DataSource<any>;
-  displayedColumns: any = ['id', 'dataUrl'];
+  displayedColumns: any = ['id', 'dataUrl','comment','commentBy'];
+  name: string = 'My patients location on map';
+  lat: number = 51.678418;
+  lng: number = 7.809007;
 
   constructor(private userService: UserService, private activeRoute: ActivatedRoute) {
   }
 
+  isResearcher() {
+    return "researcher" == localStorage.getItem('role');
+
+  }
+
   ngOnInit() {
     this.sessions = new SessionDataSource(this.userService, this.activeRoute.snapshot.params['username']);
-    // remove any existing graph.
+     this.userService.getUser(this.activeRoute.snapshot.params['username']).subscribe(data => {
+      this.lat = data.lat;
+      this.lng= data.longitude;
+
+    });
+    this.userService.getMe()
+
+
     d3.selectAll("svg").remove();
   }
 

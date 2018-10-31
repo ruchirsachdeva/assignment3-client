@@ -4,6 +4,8 @@ import {UserService} from './shared/user/user.service';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 import {
@@ -25,6 +27,9 @@ import {
 import { UserComponent } from './user/user.component';
 import { TherapyListComponent } from './therapy-list/therapy-list.component';
 import { SessionListComponent } from './session-list/session-list.component';
+import { RssFeedComponent } from './rss-feed/rss-feed.component';
+import {EmbedVideo} from "ngx-embed-video/dist";
+
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -63,7 +68,8 @@ export function getAuthServiceConfigs() {
     LoginComponent,
     UserComponent,
     TherapyListComponent,
-    SessionListComponent
+    SessionListComponent,
+    RssFeedComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -82,7 +88,11 @@ export function getAuthServiceConfigs() {
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    SocialLoginModule
+    SocialLoginModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAFgM81Qz-SwfTzUsr4F51AgDj0HdN88CQ'
+    }),
+    EmbedVideo.forRoot()
   ],
   providers: [UserService, AppService, {
     provide: AuthServiceConfig,

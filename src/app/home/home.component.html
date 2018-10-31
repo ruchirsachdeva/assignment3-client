@@ -2,7 +2,22 @@
   <h1>Welcome to the PD Social App</h1>
   <app-user></app-user>
   <app-therapy-list></app-therapy-list>
+  <app-rss-feed></app-rss-feed>
 </div>
+
+<div [hidden]="!isPatient()">
+  <br/>
+  <br/>
+  <br/>
+  <label>Parkinson Disease exercise videos:</label>
+  <br/>
+  <iframe src="https://www.youtube.com/embed/Ez2GeaMa4c8" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/3n8UjH9h_8I" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/cRLB7WqX0fU" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/PgDhsv5Jmmc" frameborder="0" allowfullscreen></iframe>
+
+</div>
+
 
 <div [hidden]="authenticated()">
   <h1>Login the PD Social App</h1>

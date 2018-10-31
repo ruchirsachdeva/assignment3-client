@@ -5,14 +5,29 @@
       <mat-cell *matCellDef="let session"> {{session.testSessionId}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="dataUrl">
-      <mat-header-cell *matHeaderCellDef> dataUrl </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Visualize data </mat-header-cell>
       <mat-cell *matCellDef="let session"> <button mat-button (click)="setData(session.data)">{{session.dataUrl}}</button> </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+      <mat-header-cell *matHeaderCellDef> Comment </mat-header-cell>
+      <mat-cell *matCellDef="let session">
+        <input matInput [readonly]="!isResearcher()" placeholder="Comment" [(ngModel)]="session.comment.note" *ngIf="session.comment">
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="commentBy">
+      <mat-header-cell *matHeaderCellDef>Comment by </mat-header-cell>
+      <mat-cell *matCellDef="let session"> <div  *ngIf="session.comment">{{session.comment.medUser.username}}</div> </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
   <mat-paginator></mat-paginator>
+</div>
+<div *ngIf="isResearcher()">
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
 </div>
 <p>
   session-list works!

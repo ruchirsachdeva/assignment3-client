@@ -7,6 +7,7 @@ import {
   FacebookLoginProvider
 } from "angular5-social-auth";
 import {UserService} from "./shared/user/user.service";
+import {EmbedVideoService} from "ngx-embed-video/dist";
 
 
 @Component({
@@ -15,7 +16,15 @@ import {UserService} from "./shared/user/user.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private app: AppService, private userService: UserService, private router: Router, private socialAuthService: AuthService) {
+
+  youtubeUrl = "https://www.youtube.com/watch?v=iHhcHTlGtRs";
+  youtubeId = "iHhcHTlGtRs";
+
+  constructor(private embedService: EmbedVideoService, private app: AppService, private userService: UserService, private router: Router, private socialAuthService: AuthService) {
+    console.log(this.embedService.embed(this.youtubeUrl));
+    console.log(this.embedService.embed_youtube(this.youtubeId));
+
+
   }
 
 
