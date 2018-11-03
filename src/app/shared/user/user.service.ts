@@ -17,8 +17,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/me/tests', httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/me/tests', httpOptions);
   }
 
 
@@ -29,8 +29,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/user/'+username+'/tests', httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/user/'+username+'/tests', httpOptions);
   }
 
   getUser(username: string): Observable<any> {
@@ -40,8 +40,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/user/'+username, httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/user/'+username, httpOptions);
   }
 
 
@@ -53,8 +53,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/rssfeed', httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/rssfeed', httpOptions);
   }
 
 
@@ -65,8 +65,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/me', httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/me', httpOptions);
   }
 
 
@@ -77,8 +77,8 @@ export class UserService {
     };
 
 
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.get('//localhost:8080/api/users/therapies', httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.get('https://assignment3-lnu.herokuapp.com/api/users/therapies', httpOptions);
   }
 
   addNote(testSessionId: number, note: string): Observable<any>  {
@@ -86,12 +86,8 @@ export class UserService {
       headers: new HttpHeaders({authorization: 'Bearer ' + localStorage.getItem('jwt')})
 
     };
-    const note = {
-      note: note
-    };
 
-
-    //return this.http.get('//localhost:8080//cool-cars');
-    return this.http.post('//localhost:8080/api/users/user/me/tests/'+testSessionId+'/note',note ,httpOptions);
+    //return this.http.get('https://assignment3-lnu.herokuapp.com//cool-cars');
+    return this.http.post('https://assignment3-lnu.herokuapp.com/api/users/user/me/tests/'+testSessionId+'/note',{note: note} ,httpOptions);
   }
 }
