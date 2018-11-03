@@ -4,7 +4,8 @@ import {Observable} from "rxjs";
 import {UserService} from "../shared/user/user.service";
 import * as d3 from 'd3';
 import {DataSource} from "@angular/cdk/collections";
-import {Data, User} from "../models/domains";
+import {Data, Note} from "../models/domains";
+
 
 @Component({
   selector: 'app-session-list',
@@ -14,10 +15,14 @@ import {Data, User} from "../models/domains";
 export class SessionListComponent implements OnInit, OnDestroy {
 
   sessions: DataSource<any>;
-  displayedColumns: any = ['id', 'dataUrl','comment','commentBy'];
+  displayedColumns: any = ['id', 'dataUrl'];
   name: string = 'My patients location on map';
   lat: number = 51.678418;
   lng: number = 7.809007;
+  notes: Array<Note>;
+  testSessionId: number
+
+
 
   constructor(private userService: UserService, private activeRoute: ActivatedRoute) {
   }
@@ -27,12 +32,18 @@ export class SessionListComponent implements OnInit, OnDestroy {
 
   }
 
+  addNote(note: string) {
+    this.userService.addNote(this.testSessionId, note).subscribe(notes => {
+      this.notes = notes;
+    });
+  }
+
+
   ngOnInit() {
     this.sessions = new SessionDataSource(this.userService, this.activeRoute.snapshot.params['username']);
-     this.userService.getUser(this.activeRoute.snapshot.params['username']).subscribe(data => {
+    this.userService.getUser(this.activeRoute.snapshot.params['username']).subscribe(data => {
       this.lat = data.lat;
       this.lng= data.longitude;
-
     });
     this.userService.getMe()
 
@@ -41,13 +52,17 @@ export class SessionListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.notes = new Array();
+    this.testSessionId=null;
     // remove any existing graph.
     d3.selectAll("svg").remove();
   }
 
 
-  setData(data: Array<Data>) {
+  setData(data: Array<Data>, notes: Array<Note>, testSessionId: number) {
 
+    this.notes = notes;
+    this.testSessionId= testSessionId;
     // remove any existing graph.
     d3.selectAll("svg").remove();
 

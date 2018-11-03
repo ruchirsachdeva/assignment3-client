@@ -80,4 +80,18 @@ export class UserService {
     //return this.http.get('//localhost:8080//cool-cars');
     return this.http.get('//localhost:8080/api/users/therapies', httpOptions);
   }
+
+  addNote(testSessionId: number, note: string): Observable<any>  {
+    const httpOptions = {
+      headers: new HttpHeaders({authorization: 'Bearer ' + localStorage.getItem('jwt')})
+
+    };
+    const note = {
+      note: note
+    };
+
+
+    //return this.http.get('//localhost:8080//cool-cars');
+    return this.http.post('//localhost:8080/api/users/user/me/tests/'+testSessionId+'/note',note ,httpOptions);
+  }
 }
