@@ -65,7 +65,7 @@ export class AppComponent {
         var credentials = {provider: socialPlatformProvider, token: userData['token']};
         console.log(credentials + " credentials *******");
         this.app.authenticateSocial(credentials, () => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         });
 
 
