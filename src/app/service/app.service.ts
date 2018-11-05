@@ -56,6 +56,7 @@ export class AppService {
 
   logout() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
     return this.http.post('https://pd-social-server.herokuapp.com/logout',null);
   //  this.authEvents.next(new DidLogout());
   }
